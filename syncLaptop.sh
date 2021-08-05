@@ -2,7 +2,7 @@
 
 mount_point=$(lsblk | grep sd |sed -n '2 p' | awk -F" " {'print $7'})
 backup_dir="$mount_point/sz96-backup"
-backup_list="$HOME/Documents $HOME/Downloads $HOME/Pictures $HOME/Videos $HOME/.config"
+backup_list="$HOME/Documents $HOME/Downloads $HOME/Pictures $HOME/Videos $HOME/.config $HOME/Audio"
 
 if [[ -z "$mount_point" ]]
 then
@@ -21,11 +21,6 @@ fi
 
 rsync -auvzP $backup_list $backup_dir
 
-if [[ "$(ls -A $HOME/arts)" ]]
-then
-    mv -v $HOME/arts/* "$backup_dir/arts";
-fi
-
 read -sr -n 1 -p "Do you want to umount the backup device?(Y/n)" choice
 printf "\n"
 
@@ -33,4 +28,3 @@ case "$choice" in
     n|N ) echo "backup finished";;
     * ) sudo umount "$mount_point" && echo "backup finished";;
 esac
-

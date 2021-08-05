@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/sh
 
 ### change apt mirror ###
 sudo sed -i 's/us/tw/g' /etc/apt/sources.list
