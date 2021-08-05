@@ -2,7 +2,7 @@
 
 mount_point=$(lsblk | grep sd |sed -n '2 p' | awk -F" " {'print $7'})
 backup_dir="$mount_point/sz96-backup"
-backup_list="$HOME/Documents $HOME/Audio $HOME/.emacs.d $HOME/projects $HOME/Pictures $HOME/Videos"
+backup_list="$HOME/Documents $HOME/Downloads $HOME/Pictures $HOME/Videos $HOME/.config"
 
 if [[ -z "$mount_point" ]]
 then
@@ -19,7 +19,8 @@ then
     esac
 fi
 
-rsync -auvzP --delete $backup_list $backup_dir
+rsync -auvzP $backup_list $backup_dir
+
 if [[ "$(ls -A $HOME/arts)" ]]
 then
     mv -v $HOME/arts/* "$backup_dir/arts";
