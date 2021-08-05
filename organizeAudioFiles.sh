@@ -1,8 +1,9 @@
 #!/bin/bash
 
-year=$(ls | grep flac | head -1 | awk -F "-" {'print $1'})
-month=$(ls | grep flac | head -1 | awk -F "-" {'print $2'})
-day=$(ls | grep flac | head -1 | awk -F "-" {'print $3'})
+sample=$(ls | grep wav | head -1)
+year=$(echo $sample | awk -F "-" {'print $1'})
+month=$(echo $sample | awk -F "-" {'print $2'})
+day=$(echo $sample | awk -F "-" {'print $3'})
 
 year_month="$year-$month"
 date="$year-$month-$day"
@@ -35,5 +36,5 @@ else
     create_full_path
 fi
 
-mv -v ~/Audio/*.flac "$HOME/Audio/$year/$year_month/$date/"
+mv -v ~/Audio/*.wav "$HOME/Audio/$year/$year_month/$date/"
 echo "Finished"
